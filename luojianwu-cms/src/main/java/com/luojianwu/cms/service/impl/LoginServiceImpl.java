@@ -6,29 +6,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.github.pagehelper.PageInfo;
+import com.luojianwu.cms.dao.LoginDao;
 import com.luojianwu.cms.dao.UserDao;
 import com.luojianwu.cms.pojo.User;
+import com.luojianwu.cms.service.LoginService;
 import com.luojianwu.cms.service.UserService;
 
 @Transactional
 @Service
-public class UserServiceImpl implements UserService {
+public class LoginServiceImpl implements LoginService {
 	@Autowired
-	private UserDao userDao;
+	private LoginDao loginDao;
 
 	@Override
-	public List<User> list() {
-		// TODO Auto-generated method stub
-		return userDao.list();
+	public boolean tologin(User user) {
+		// TODO Auto-generated metho d stub
+		int i=loginDao.tologin(user);
+		System.out.println(i+"****************");
+		if(i>0) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
+	
 
-
-	@Override
-	public PageInfo<User> queryUser(User user) {
-		// TODO Auto-generated method stub
-		List<User> userList=userDao.queryUser(user);
-		return new PageInfo(userList) ;
-	}
+	
 }
